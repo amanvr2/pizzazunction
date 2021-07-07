@@ -929,8 +929,17 @@ body {
 
 .omenuItemlist-item>button{background-color: #8F1114;border: none;}
 
+.place-order{text-align: center;height: 300px;}
+.cart-table{height: auto;padding: 30px;}
 
+.place-order>a{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
+.empty-cart{text-align: center;height: 300px;display: flex;align-items: center;justify-content: center;}
 
 
 

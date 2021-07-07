@@ -28,7 +28,7 @@
 
             @foreach($tops as $data)
 
-            <input type="checkbox" name="toppings[]" value="{{$data->name}}" >
+            <input type="checkbox" name="toppings[]" value="{{$data->name}}">
             <label>{{$data->name}}</label><br>
 
             @endforeach 
@@ -89,13 +89,30 @@
 
             <h4> First Pizza </h4>
 
-            @foreach($tops as $data)
+            <input type="checkbox" name="topping1" value="onion">
+            <label>Onion</label><br>
 
-            <input type="checkbox" name="toppings[]" value="{{$data->name}}">
+            <input type="checkbox" name="topping2" value="capsicum">
+            <label>Capsicum</label><br>
+
+            <input type="checkbox" name="topping3" value="paneer">
+            <label>Paneer</label><br>
+
+            <input type="checkbox" name="topping4" value="olive">
+            <label>Olive</label><br><br>
+
+            <input type="checkbox" name="topping5" value="paneer">
+            <label>Red Onions</label><br>
+
+            <input type="checkbox" name="topping6" value="paneer">
+            <label>Tomatoes</label><br>
+
+            <!-- @foreach($tops as $data)
+
+            <input type="checkbox" name="topping[]" value="onion">
             <label>{{$data->name}}</label><br>
 
-            @endforeach 
-
+            @endforeach -->
 
             <h4>Additional Toppings </h4>
 
@@ -106,29 +123,46 @@
                 </tr>
               </thead>
               <tbody>
-
-              @foreach($tops as $data)
-                <tr><td><input type="checkbox" name="addtoppings[]" value="{{$data->name}}"></td>
-                <td><label>{{$data->name}}</label></td>
+            
+                <tr><td><input type="checkbox" name="addtopping1" value="extra-cheese"></td>
+                <td><label>Extra Cheese +10</label></td>
                 </tr>
-                @endforeach 
+
+                <tr><td><input type="checkbox" name="addtopping2" value="cheese-burst"></td>
+                <td><label>Cheese burst +20</label></td>
+
+                <input type="checkbox" name="addtopping3" value="paneer">
+                <label>Red Onions</label><br>
+
+                <input type="checkbox" name="addtopping4" value="paneer">
+                <label>Tomatoes</label><br>
+                </tr>
+
               </tbody>
             </table>
-
-    
 
 
 
 
             <h4> Second Pizza </h4>
 
-            @foreach($tops as $data)
+            <input type="checkbox" name="sectopping1" value="onion">
+            <label>Onion</label><br>
 
-            <input type="checkbox" name="sectoppings[]" value="{{$data->name}}">
-            <label>{{$data->name}}</label><br>
+            <input type="checkbox" name="sectopping2" value="capsicum">
+            <label>Capsicum</label><br>
 
-            @endforeach 
+            <input type="checkbox" name="sectopping3" value="paneer">
+            <label>Paneer</label><br>
 
+            <input type="checkbox" name="sectopping4" value="olive">
+            <label>Olive</label><br><br>
+
+            <input type="checkbox" name="sectopping5" value="paneer">
+            <label>Red Onions</label><br>
+
+            <input type="checkbox" name="sectopping6" value="paneer">
+            <label>Tomatoes</label><br>
 
             <h4>Additional Toppings </h4>
 
@@ -140,11 +174,20 @@
               </thead>
               <tbody>
 
-              @foreach($tops as $data)
-                <tr><td><input type="checkbox" name="secaddtoppings[]" value="{{$data->name}}"></td>
-                <td><label>{{$data->name}}</label></td>
+                <tr><td><input type="checkbox" name="secaddtopping1" value="extra-cheese"></td>
+                <td><label>Extra Cheese +10</label></td>
                 </tr>
-                @endforeach 
+
+                <tr><td><input type="checkbox" name="secaddtopping2" value="cheese-burst"></td>
+                <td><label>Cheese burst +20</label></td>
+
+                <input type="checkbox" name="secaddtopping3" value="paneer">
+                <label>Red Onions</label><br>
+
+                <input type="checkbox" name="secaddtopping4" value="paneer">
+                <label>Tomatoes</label><br>
+                </tr>
+
               </tbody>
             </table>
 
@@ -186,13 +229,23 @@
 
             <h4> First Pizza </h4>
 
-            @foreach($tops as $data)
+            <input type="checkbox" name="topping1" value="onion">
+            <label>Onion</label><br>
 
-            <input type="checkbox" name="toppings[]" value="{{$data->name}}">
-            <label>{{$data->name}}</label><br>
+            <input type="checkbox" name="topping2" value="capsicum">
+            <label>Capsicum</label><br>
 
-            @endforeach 
+            <input type="checkbox" name="topping3" value="paneer">
+            <label>Paneer</label><br>
 
+            <input type="checkbox" name="topping4" value="olive">
+            <label>Olive</label><br><br>
+
+            <input type="checkbox" name="topping5" value="paneer">
+            <label>Red Onions</label><br>
+
+            <input type="checkbox" name="topping6" value="paneer">
+            <label>Tomatoes</label><br>
 
             <h4>Additional Toppings </h4>
 
@@ -203,12 +256,21 @@
                 </tr>
               </thead>
               <tbody>
-
-              @foreach($tops as $data)
-                <tr><td><input type="checkbox" name="addtoppings[]" value="{{$data->name}}"></td>
-                <td><label>{{$data->name}}</label></td>
+            
+                <tr><td><input type="checkbox" name="topping1" value="extra-cheese"></td>
+                <td><label>Extra Cheese +10</label></td>
                 </tr>
-                @endforeach 
+
+                <tr><td><input type="checkbox" name="addtopping2" value="cheese-burst"></td>
+                <td><label>Cheese burst +20</label></td>
+
+                <input type="checkbox" name="addtopping3" value="paneer">
+                <label>Red Onions</label><br>
+
+                <input type="checkbox" name="topping4" value="paneer">
+                <label>Tomatoes</label><br>
+                </tr>
+
               </tbody>
             </table>
 
@@ -217,13 +279,23 @@
 
             <h4> Second Pizza </h4>
 
-            @foreach($tops as $data)
+            <input type="checkbox" name="sectopping1" value="onion">
+            <label>Onion</label><br>
 
-            <input type="checkbox" name="sectoppings[]" value="{{$data->name}}">
-            <label>{{$data->name}}</label><br>
+            <input type="checkbox" name="sectopping2" value="capsicum">
+            <label>Capsicum</label><br>
 
-            @endforeach 
+            <input type="checkbox" name="sectopping3" value="paneer">
+            <label>Paneer</label><br>
 
+            <input type="checkbox" name="sectopping4" value="olive">
+            <label>Olive</label><br><br>
+
+            <input type="checkbox" name="topping3" value="paneer">
+            <label>Red Onions</label><br>
+
+            <input type="checkbox" name="topping3" value="paneer">
+            <label>Tomatoes</label><br>
 
             <h4>Additional Toppings </h4>
 
@@ -235,23 +307,43 @@
               </thead>
               <tbody>
 
-              @foreach($tops as $data)
-                <tr><td><input type="checkbox" name="secaddtoppings[]" value="{{$data->name}}"></td>
-                <td><label>{{$data->name}}</label></td>
+                <tr><td><input type="checkbox" name="secaddtopping1" value="extra-cheese"></td>
+                <td><label>Extra Cheese +10</label></td>
                 </tr>
-                @endforeach 
+
+                <tr><td><input type="checkbox" name="secaddtopping2" value="cheese-burst"></td>
+                <td><label>Cheese burst +20</label></td>
+
+                <input type="checkbox" name="secaddtopping3" value="paneer">
+                <label>Red Onions</label><br>
+
+                <input type="checkbox" name="secaddtopping4" value="paneer">
+                <label>Tomatoes</label><br>
+                </tr>
+
               </tbody>
             </table>
+
 
             <h4> Third Pizza </h4>
 
-            @foreach($tops as $data)
+            <input type="checkbox" name="thirdtopping1" value="onion">
+            <label>Onion</label><br>
 
-            <input type="checkbox" name="thirdtoppings[]" value="{{$data->name}}">
-            <label>{{$data->name}}</label><br>
+            <input type="checkbox" name="thirdtopping2" value="capsicum">
+            <label>Capsicum</label><br>
 
-            @endforeach 
+            <input type="checkbox" name="thirdtopping3" value="paneer">
+            <label>Paneer</label><br>
 
+            <input type="checkbox" name="thirdtopping4" value="olive">
+            <label>Olive</label><br><br>
+
+            <input type="checkbox" name="topping3" value="paneer">
+            <label>Red Onions</label><br>
+
+            <input type="checkbox" name="topping3" value="paneer">
+            <label>Tomatoes</label><br>
 
             <h4>Additional Toppings </h4>
 
@@ -263,13 +355,23 @@
               </thead>
               <tbody>
 
-              @foreach($tops as $data)
-                <tr><td><input type="checkbox" name="thirdaddtoppings[]" value="{{$data->name}}"></td>
-                <td><label>{{$data->name}}</label></td>
+                <tr><td><input type="checkbox" name="thirdaddtopping1" value="extra-cheese"></td>
+                <td><label>Extra Cheese +10</label></td>
                 </tr>
-                @endforeach 
+
+                <tr><td><input type="checkbox" name="thirdaddtopping2" value="cheese-burst"></td>
+                <td><label>Cheese burst +20</label></td>
+
+                <input type="checkbox" name="thirdaddtopping3" value="paneer">
+                <label>Red Onions</label><br>
+
+                <input type="checkbox" name="thirdaddtopping4" value="paneer">
+                <label>Tomatoes</label><br>
+                </tr>
+
               </tbody>
             </table>
+
             <button type="submit" name="submit" class="btn btn-primary">Add</button>
 
           </form>

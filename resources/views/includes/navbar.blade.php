@@ -24,7 +24,7 @@
                   <li class=""><a href="/#about"><i id= "icon" class="fa fa-info-circle" aria-hidden="true"></i>About Us</a></li>
                   <li class=""><a href="/contactus"><i id= "icon" class="fa fa-envelope" aria-hidden="true"></i>Contact Us</a></li>
  
-
+ 
 
                 @if(isset($_COOKIE['adminname']))
 
