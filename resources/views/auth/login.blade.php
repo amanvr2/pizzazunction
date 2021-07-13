@@ -9,7 +9,7 @@
     <form method="POST" action="{{ route('login') }}" class="form-group">                          
       @csrf                     
 
-    
+     
           <input id="name" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email Address*" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
             @error('email')
@@ -35,7 +35,9 @@
         </button>
 
 
+        <br><br>
 
+        <a href="/register"> New user ? Register now </a>
     
 
                            

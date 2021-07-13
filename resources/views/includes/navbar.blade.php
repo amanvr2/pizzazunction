@@ -47,8 +47,8 @@
 
                 @if(Auth::guest())
 
-                  <li><a href="/login" id=""><span class="glyphicon glyphicon-user"></span> User Log In</a></li>
-                  <li><a href="/register" id=""><span class="glyphicon glyphicon-user"></span> User Sign Up</a></li>
+                  <li><a href="/login" id=""><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+                  <!-- <li><a href="/register" id=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
                 @else
 
                 

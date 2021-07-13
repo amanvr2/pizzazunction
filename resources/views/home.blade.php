@@ -7,7 +7,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title"><span id="title"></span></h4>
         </div>
         <div class="modal-body">
           <span id="title"></span>
@@ -18,42 +18,36 @@
           <form action= "" class="form-group" id="editForm">
 
             @csrf
+
+            <label> Quantity </label><br>
             <select name="quantity" class="form-control">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+
+            @for($i=0;$i < 50;$i++)
+
+              <option value = {{ $i }} > {{ $i }}</option>
+
+            @endfor
             </select>
 
-
+            <br>
             @foreach($tops as $data)
 
             <input type="checkbox" name="toppings[]" value="{{$data->name}}" >
-            <label>{{$data->name}}</label><br>
+            &nbsp &nbsp<label>{{$data->name}}</label><br>
 
             @endforeach 
 
 
             <h4>Additional Toppings </h4>
 
-            <table class="table">
-              <thead>
-                <tr>
-                                
-                </tr>
-              </thead>
-              <tbody>
+            @foreach($tops as $data)
+              <input type="checkbox" name="addtoppings[]" value="{{$data->name}}">
+              &nbsp &nbsp<label>{{$data->name}}</label><br>
+              
+            @endforeach 
 
-              @foreach($tops as $data)
-                <tr><td><input type="checkbox" name="addtoppings[]" value="{{$data->name}}"></td>
-                <td><label>{{$data->name}}</label></td>
-                </tr>
-                @endforeach 
-              </tbody>
-            </table>
-
-
-            <button type="submit" name="submit" class="btn btn-primary">Add</button>
+            <br><br>
+            <button type="submit" name="submit" class="btn btn-primary">Add to Cart</button>
 
           </form>
         </div>
