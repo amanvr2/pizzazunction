@@ -5,14 +5,18 @@
 @if(Session::has('prodAddedmsg'))
 
   <div class="container">
-    <div class="alert alert-success">
+    <div class="alert alert-success" id="alert">
       Product added to cart
     </div>
   </div>
 
 @elseif(Session::has('proddeletemsg'))
 
-  <p class="btn btn-danger"> Product deleted from cart </p>
+  <div class="container">
+    <div class="alert alert-danger">
+      Product Deleted from cart
+    </div>
+  </div>
 
 @elseif(Session::has('order-placed'))
 
@@ -72,11 +76,24 @@
                 ?> 
             </td>
             <td> <a href="/delete-product/{{ $cartData->id }}" role="button" class="btn btn-danger"> Delete </a> </td>
+
+            <td> <a href="/edit-product/{{ $cartData->id }}" role="button" class="btn btn-primary"> edit </a> </td>
+
           </tr>
 
           
 
         @endforeach
+
+       
+        @if(\Session::has('error'))
+            <div class="alert alert-danger">{{ \Session::get('error') }}</div>
+            {{ \Session::forget('error') }}
+        @endif
+        @if(\Session::has('success'))
+            <div class="alert alert-success">{{ \Session::get('success') }}</div>
+            {{ \Session::forget('success') }}
+        @endif
 
 
        
@@ -88,7 +105,7 @@
   </div>
   <div class="place-order">
 
-  <a href="/place-order" role="button" class="btn btn-success">Place order for $ {{ $grandTotal }}</a>
+  <a href="/process-transaction/{{ $grandTotal }}" role="button" class="btn btn-success">Place order for $ {{ $grandTotal }}</a>
 
 </div>
   @endif 

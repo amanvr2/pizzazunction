@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-   
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap" rel="stylesheet">
 
-
+    <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_SANDBOX_CLIENT_ID') }}"></script>
 
 
     <meta charset="utf-8">
@@ -43,6 +43,7 @@
   <script src="{{ asset('/js/scroll.js') }}"></script>
   <script src="{{ asset('/js/slideshow.js') }}"></script>
   <script src = "{{ asset('/js/popup.js') }}"></script>
+  <script src = "{{ asset('/js/check.js') }}"></script>
  
 
 </body>

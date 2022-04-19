@@ -92,15 +92,22 @@ class HomeController extends Controller
       $toppings = "";
       $secToppings = "";
       $thirdToppings = "";
+     
+      $count = count($topping);
+
+      if($count > 4){
+      echo "You can select 4 toppings only";
+      
+      }
+
+      else{
 
       if($topping != NULL){
         foreach($topping as $items=>$v){
       
-          $toppings = $toppings.','.$topping[$items];
+          $toppings = $toppings.'--First Pizza Toppings--'.$topping[$items];
         }
       }
-
-
 
       if($secTopping != NULL){
         $toppings = $toppings.'--Second Pizza Toppings--';
@@ -110,9 +117,6 @@ class HomeController extends Controller
         }
       }
 
- 
-    
-
       if($thirdTopping != NULL){
         $toppings = $toppings.'--Third Pizza Toppings--';
         foreach($thirdTopping as $items=>$v){
@@ -121,9 +125,6 @@ class HomeController extends Controller
         }
   
       }
-
-    
-
       
       $addtopping = $req->input('addtoppings');
       $secaddtopping = $req->input('secaddtoppings');
@@ -167,8 +168,6 @@ class HomeController extends Controller
         }
       }
      
-
-
       if($thirdaddtopping != NULL){
         $paid_toppingsnames = $paid_toppingsnames.'--Third Pizza Toppings--';
 
@@ -186,10 +185,6 @@ class HomeController extends Controller
         }
       }
     
-
-
-
-
       $uid = auth()->user()->id;
       $data = DB::select('select * from cart where user_id = ?',[$uid]);
 
@@ -242,6 +237,7 @@ class HomeController extends Controller
 
 
       }
+    }
 
     }
 
@@ -469,6 +465,18 @@ class HomeController extends Controller
 
     }
 
+
+    public function editIncart($id){
+
+     $data = DB::select('select * from cartproducts where id = ?',[$id]);
+     $toppings = DB::select('select * from paid_toppings');
+
+
+     return view('order.viewProd')->with('data',$data)->with('toppings', $toppings);
+
+
+    }
+
     public function placeOrder(){
 
 
@@ -532,6 +540,63 @@ class HomeController extends Controller
     }
 
     return view('order.orderdetails')->with('orderItems', $orderItems);
+
+  }
+
+  public function editIncartProduct(Request $req, $id){
+
+    $qty = $req->input('quantity');
+    $freeToppings = $req->input('toppings');
+    $paidToppings = $req->input('addtoppings');
+
+    $toppings = "";
+    $paidtoppings = "";
+
+    if($freeToppings != NULL){
+      $toppings = $toppings.'--First Pizza Toppings--';
+      foreach($freeToppings as $items=>$v){
+    
+        $toppings = $toppings.','.$freeToppings[$items];
+      }
+    }
+
+    if($paidToppings != NULL){
+
+      $paidtoppings = $paidtoppings.'--First Pizza Toppings--';
+      $toppingsPrice = 0;
+
+      
+      foreach($paidToppings as $items=>$v){
+    
+        $paidtoppings = $paidtoppings.','.$paidToppings[$items];
+
+        $test = DB::Select('select price from paid_toppings where name = ?',[$paidToppings[$items]]);
+
+        foreach($test as $data){
+          $total = $data->price;
+          $toppingsPrice += $total;
+        }
+      }
+    }
+
+    
+    DB::Update('Update cartProducts set quantity = ? where id = ?',[$qty, $id]);
+  
+
+    if($freeToppings != NULL){
+      DB::Update('Update cartProducts set free_toppings = ? where id = ?',[$toppings, $id]);
+    }
+
+    if($paidtoppings != NULL){
+      DB::Update('Update cartProducts set paid_toppings = ? where id = ?',[$paidtoppings, $id]);
+    }
+
+    DB::Update('Update cartProducts set paid_toppingsPrice = ? where id = ?',[$toppingsPrice, $id]);
+
+
+    echo "done";
+
+
 
   }
 

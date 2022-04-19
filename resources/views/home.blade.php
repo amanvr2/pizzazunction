@@ -22,7 +22,7 @@
             <label> Quantity </label><br>
             <select name="quantity" class="form-control">
 
-            @for($i=0;$i < 50;$i++)
+            @for($i=1;$i < 50;$i++)
 
               <option value = {{ $i }} > {{ $i }}</option>
 
@@ -30,6 +30,7 @@
             </select>
 
             <br>
+            <h4>You can select upto 4 toppings </h4>
             @foreach($tops as $data)
 
             <input type="checkbox" name="toppings[]" value="{{$data->name}}" >
@@ -42,7 +43,7 @@
 
             @foreach($tops as $data)
               <input type="checkbox" name="addtoppings[]" value="{{$data->name}}">
-              &nbsp &nbsp<label>{{$data->name}}</label><br>
+              &nbsp &nbsp<label>{{$data->name}} + ${{$data->price}}</label><br>
               
             @endforeach 
 

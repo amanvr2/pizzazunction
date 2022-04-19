@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayPalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::get('/contactus', function () {
     return view('contactus');
 });
 
+Route::get('/go', function () {
+    return view('test');
+});
+
 
 
 Auth::routes();
@@ -41,17 +46,30 @@ Route::get('/cart', 'HomeController@viewCart');
 
 Route::get('/add-tocart/{id}', 'HomeController@addTocart');
 
+
+Route::get('/edit-product/{id}', 'HomeController@editIncart');
+
 Route::get('/delete-product/{id}', 'HomeController@deleteFromcart');
 
-Route::get('/place-order', 'HomeController@placeOrder');
+Route::get('/place-order', 'HomeController@placeOrder')->name('placeOrder');
 
 Route::get('/my-orders', 'HomeController@myOrders');
 
 Route::get('/order-details/{id}', 'HomeController@orderDetails');
 
+Route::get('editcart-product/{id}', 'HomeController@editIncartProduct');
 
 
 
+
+
+
+
+
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('/process-transaction/{grandTotal}', [PayPalController::class, 'processTransaction']);
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 
 
