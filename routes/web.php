@@ -59,12 +59,12 @@ Route::get('/order-details/{id}', 'HomeController@orderDetails');
 
 Route::get('editcart-product/{id}', 'HomeController@editIncartProduct');
 
+ 
 
 
 
 
-
-
+/////////////////////////   payment routes //////////////////////////////////////////
 
 Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
 Route::get('/process-transaction/{grandTotal}', [PayPalController::class, 'processTransaction']);

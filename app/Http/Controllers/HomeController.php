@@ -494,13 +494,15 @@ class HomeController extends Controller
 
       // $cartDataarray= json_decode( json_encode($cartData), true);
        
-      $grandTotal = 0;
+      $grandTotal = 0.0;
       foreach($cartData as $data){
 
         $total = ($data->price * $data->quantity) + $data->paid_toppingsPrice;
         $grandTotal = $grandTotal + $total;
 
       }
+
+      //echo $grandTotal;
 
       $orderData = array('orderamount'=>$grandTotal,'order_items'=>$items, 'user_id'=>$uid);
 
