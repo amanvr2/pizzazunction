@@ -42,7 +42,7 @@
 
   @else
 
-  <div class="cart-table">
+  <div class="cart-table" style="overflow-x:auto;">
 
     <table class="table">
       <thead>

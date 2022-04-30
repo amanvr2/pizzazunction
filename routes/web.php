@@ -76,7 +76,7 @@ Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])
 
 
 
-
+ 
 
 ///////////////////////////////////  admin //////////////////////////////////////////////
 
@@ -100,6 +100,10 @@ Route::post('/edit-deal/{id}', 'adminController@editdeal');
 Route::get('/delete-deal/{id}', 'adminController@deletedeal');
 
 Route::get('/users', 'adminController@viewusers');
+
+Route::get('/allorders', 'adminController@orders');
+
+Route::get('/orderDetails/{id}', 'adminController@orderDetails');
 
 Route::get('/admin-logout','adminController@logout');
 

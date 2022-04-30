@@ -81,7 +81,7 @@ class HomeController extends Controller
 
     }
 
-      public function addTocart(Request $req, $id){
+    public function addTocart(Request $req, $id){
 
       $quantity = $req->input('quantity');
 
@@ -93,153 +93,162 @@ class HomeController extends Controller
       $secToppings = "";
       $thirdToppings = "";
      
-      $count = count($topping);
+     
+      if($topping == NULL){
 
-      if($count > 4){
-      echo "You can select 4 toppings only";
-      
+        echo "Please select atleast one topping";
       }
-
+      
       else{
 
-      if($topping != NULL){
-        foreach($topping as $items=>$v){
-      
-          $toppings = $toppings.'--First Pizza Toppings--'.$topping[$items];
-        }
-      }
+        $count = count($topping);
 
-      if($secTopping != NULL){
-        $toppings = $toppings.'--Second Pizza Toppings--';
-        foreach($secTopping as $items=>$v){
-      
-          $toppings = $toppings.','.$secTopping[$items];
+        if($count > 4){
+          echo "You can select 4 toppings only";
+    
         }
-      }
 
-      if($thirdTopping != NULL){
-        $toppings = $toppings.'--Third Pizza Toppings--';
-        foreach($thirdTopping as $items=>$v){
+        else{
+
+          if($topping != NULL){
+            foreach($topping as $items=>$v){
+          
+              $toppings = $toppings.'--First Pizza Toppings--'.$topping[$items];
+            }
+          }
+
+          if($secTopping != NULL){
+            $toppings = $toppings.'--Second Pizza Toppings--';
+            foreach($secTopping as $items=>$v){
+          
+              $toppings = $toppings.','.$secTopping[$items];
+            }
+          }
+
+          if($thirdTopping != NULL){
+            $toppings = $toppings.'--Third Pizza Toppings--';
+            foreach($thirdTopping as $items=>$v){
+          
+              $toppings = $toppings.','.$thirdTopping[$items];
+            }
       
-          $toppings = $toppings.','.$thirdTopping[$items];
+          }
+        
+          $addtopping = $req->input('addtoppings');
+          $secaddtopping = $req->input('secaddtoppings');
+          $thirdaddtopping = $req->input('thirdaddtoppings');
+
+          $totalToppingsPrice = 0;
+          $paid_toppingsnames = "";
+
+          if($addtopping != NULL){
+
+            foreach($addtopping as $items=>$v){
+
+              $paid_toppingsnames = $paid_toppingsnames.','.$addtopping[$items];
+
+              $test = DB::select('select price from paid_toppings where name = ?',[$addtopping[$items]]);
+
+              foreach($test as $data){
+                $total = $data->price;
+                $totalToppingsPrice += $total;
+              }
+
+            }
+
+          }
+
+          if($secaddtopping != NULL){
+          $paid_toppingsnames = $paid_toppingsnames.'--Second Pizza Toppings--';
+
+
+            foreach($secaddtopping as $items=>$v){
+
+              $paid_toppingsnames = $paid_toppingsnames.','.$secaddtopping[$items];
+
+              $test = DB::select('select price from paid_toppings where name = ?',[$secaddtopping[$items]]);
+
+              foreach($test as $data){
+                $total = $data->price;
+                $totalToppingsPrice += $total;
+              }
+
+            }
+          }
+      
+          if($thirdaddtopping != NULL){
+            $paid_toppingsnames = $paid_toppingsnames.'--Third Pizza Toppings--';
+
+            foreach($thirdaddtopping as $items=>$v){
+
+              $paid_toppingsnames = $paid_toppingsnames.','.$thirdaddtopping[$items];
+        
+              $test = DB::select('select price from paid_toppings where name = ?',[$thirdaddtopping[$items]]);
+        
+              foreach($test as $data){
+                $total = $data->price;
+                $totalToppingsPrice += $total;
+              }
+        
+            }
+          }
+      
+        $uid = auth()->user()->id;
+        $data = DB::select('select * from cart where user_id = ?',[$uid]);
+
+        $cartcount = count($data);
+
+        if($cartcount == 0){
+
+          $cart = array('user_id'=>$uid);
+          DB::table('cart')->insert($cart);     //making new cart
+      
+          $productData = DB::select('select * from products where id = ?',[$id]);
+
+          foreach($productData as $productData){
+            $name = $productData->name;
+            $price = $productData->price;          
+          }
+        
+          $cartid = DB::select('select * from cart where user_id=?',[$uid]);
+          foreach($cartid as $cartid){
+            $cartId = $cartid->id;
+          }
+
+          $productcartData = array('name'=>$name, 'price'=> $price,'quantity'=>$quantity,'free_toppings'=>$toppings,'paid_toppings'=>$paid_toppingsnames,'paid_toppingsPrice'=>$totalToppingsPrice,'cart_id'=>$cartId);
+
+          DB::table('cartproducts')->insert($productcartData);
+          return redirect('/cart')->with('prodAddedmsg', 'Product added to cart');
+
         }
   
-      }
-      
-      $addtopping = $req->input('addtoppings');
-      $secaddtopping = $req->input('secaddtoppings');
-      $thirdaddtopping = $req->input('thirdaddtoppings');
+        else{
 
-      $totalToppingsPrice = 0;
-      $paid_toppingsnames = "";
+          $productData = DB::select('select * from products where id = ?',[$id]);
 
-      if($addtopping != NULL){
+          foreach($productData as $productData){
 
-        foreach($addtopping as $items=>$v){
-
-          $paid_toppingsnames = $paid_toppingsnames.','.$addtopping[$items];
-
-          $test = DB::select('select price from paid_toppings where name = ?',[$addtopping[$items]]);
-
-          foreach($test as $data){
-            $total = $data->price;
-            $totalToppingsPrice += $total;
+            $name = $productData->name;
+            $price = $productData->price;
+          
           }
 
-        }
-
-      }
-
-      if($secaddtopping != NULL){
-       $paid_toppingsnames = $paid_toppingsnames.'--Second Pizza Toppings--';
-
-
-        foreach($secaddtopping as $items=>$v){
-
-          $paid_toppingsnames = $paid_toppingsnames.','.$secaddtopping[$items];
-
-          $test = DB::select('select price from paid_toppings where name = ?',[$secaddtopping[$items]]);
-
-          foreach($test as $data){
-            $total = $data->price;
-            $totalToppingsPrice += $total;
+          $cartid = DB::select('select * from cart where user_id=?',[$uid]);
+          foreach($cartid as $cartid){
+            $cartId = $cartid->id;
           }
 
+          $productcartData = array('name'=>$name, 'price'=> $price,'quantity'=>$quantity,'free_toppings'=>$toppings,'paid_toppings'=>$paid_toppingsnames,'paid_toppingsPrice'=>$totalToppingsPrice,'cart_id'=>$cartId);
+
+          DB::table('cartproducts')->insert($productcartData);
+          return redirect('/cart')->with('prodAddedmsg', 'Product added to cart');
+
+
         }
-      }
-     
-      if($thirdaddtopping != NULL){
-        $paid_toppingsnames = $paid_toppingsnames.'--Third Pizza Toppings--';
-
-        foreach($thirdaddtopping as $items=>$v){
-
-          $paid_toppingsnames = $paid_toppingsnames.','.$thirdaddtopping[$items];
-     
-          $test = DB::select('select price from paid_toppings where name = ?',[$thirdaddtopping[$items]]);
-     
-          foreach($test as $data){
-            $total = $data->price;
-            $totalToppingsPrice += $total;
-          }
-     
-        }
-      }
-    
-      $uid = auth()->user()->id;
-      $data = DB::select('select * from cart where user_id = ?',[$uid]);
-
-      $cartcount = count($data);
-
-      if($cartcount == 0){
-
-        $cart = array('user_id'=>$uid);
-        DB::table('cart')->insert($cart);     //making new cart
-    
-        $productData = DB::select('select * from products where id = ?',[$id]);
-
-        foreach($productData as $productData){
-          $name = $productData->name;
-          $price = $productData->price;          
-        }
-      
-        $cartid = DB::select('select * from cart where user_id=?',[$uid]);
-        foreach($cartid as $cartid){
-          $cartId = $cartid->id;
-        }
-
-        $productcartData = array('name'=>$name, 'price'=> $price,'quantity'=>$quantity,'free_toppings'=>$toppings,'paid_toppings'=>$paid_toppingsnames,'paid_toppingsPrice'=>$totalToppingsPrice,'cart_id'=>$cartId);
-
-        DB::table('cartproducts')->insert($productcartData);
-        return redirect('/cart')->with('prodAddedmsg', 'Product added to cart');
-
-      }
-
-      else{
-
-        $productData = DB::select('select * from products where id = ?',[$id]);
-
-        foreach($productData as $productData){
-
-          $name = $productData->name;
-          $price = $productData->price;
-         
-        }
-
-        $cartid = DB::select('select * from cart where user_id=?',[$uid]);
-        foreach($cartid as $cartid){
-          $cartId = $cartid->id;
-        }
-
-        $productcartData = array('name'=>$name, 'price'=> $price,'quantity'=>$quantity,'free_toppings'=>$toppings,'paid_toppings'=>$paid_toppingsnames,'paid_toppingsPrice'=>$totalToppingsPrice,'cart_id'=>$cartId);
-
-        DB::table('cartproducts')->insert($productcartData);
-        return redirect('/cart')->with('prodAddedmsg', 'Product added to cart');
-
-
       }
     }
-
-    }
+  
+  }
 
     // public function addTocart(Request $req, $id){
 

@@ -27,6 +27,24 @@
                 </span>
             @enderror
             <br>
+
+            <input id="number" type="number" class="form-control @error('email') is-invalid @enderror" name="number" value="{{ old('email') }}" required autocomplete="number" placeholder="Number">
+
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <br>
+
+            <input id="address" type="text" class="form-control @error('email') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" placeholder="Address">
+
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <br>
             
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
             <br>

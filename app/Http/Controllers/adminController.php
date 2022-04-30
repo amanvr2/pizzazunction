@@ -23,7 +23,7 @@ class adminController extends Controller
      echo "wrong";
     } 
   }
-
+ 
 
   public function authcheck(Request $req){
 
@@ -139,6 +139,30 @@ class adminController extends Controller
 
       return view('admin.user')->with('data', $data);
 
+    }
+
+    public function orders(){
+
+      $data = DB::select('select * from orders');
+
+      return view('admin.allOrders')->with('data', $data);
+
+    }
+
+    public function orderDetails($id){
+
+      $orderDetails = DB::select('select * from orders where id=?',[$id]);
+
+      foreach($orderDetails as $orderDetails){
+
+        $orderItems = unserialize($orderDetails->order_items);
+        $custId = $orderDetails->user_id;
+
+      }
+
+      $customerData = DB::Select('select * from users where id = ?',[$custId]);
+
+      return view('admin.allOrderdetails')->with('orderItems', $orderItems)->with('customerData',$customerData);
     }
 
     public function logout()

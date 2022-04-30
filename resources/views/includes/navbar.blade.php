@@ -31,8 +31,9 @@
                 <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ $_COOKIE['adminname'] }}<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/home"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp Dashboard</a></li>
+                    <li><a href="/admin-dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp Dashboard</a></li>
                     <li><a href="/my-details"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp My Details</a></li>
+                    <li><a href="/allorders"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp Orders</a></li>
                     <li><a href="/users"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbspMy users</a></li>
                     <li><a href="/admin-logout"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbspLogout</a></li>
                   
